@@ -130,6 +130,7 @@ class Calculate:
     def adding_value_to_xlsx(self):
         # total raw on target sheet
         self.sheet_raw_count = self.get_sheet.max_row + 1
+        print(self.sheet_raw_count)
 
         # var: total impure gold
         total_impure = 0
@@ -158,7 +159,10 @@ class Calculate:
             # step-2: pure_value = (less_value * weight)/100
             
             # step-1
-            less_value = float(percent_value) - float(self.value)
+            if (percent_value is not None) or (weight_value is not None):
+                less_value = float(percent_value) - float(self.value)
+            else:
+                print("-----")
             # step-2
             pure_value = (less_value * weight_value)/100
 
@@ -168,6 +172,8 @@ class Calculate:
             self.add_sheet_to_xlsx.write(f"C{i+1}", less_value)
             self.add_sheet_to_xlsx.write(f"D{i+1}", weight_value)
             self.add_sheet_to_xlsx.write(f"E{i+1}", self.truncate(pure_value, 2))
+
+            print(f"calc[{i}]: Creating done!")
             
             # getting all impure gold
             # impure gold: all target sheet weight value
