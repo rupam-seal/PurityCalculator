@@ -8,6 +8,9 @@ import xlsxwriter as xw
 import os
 from tkinter import filedialog
 
+from utils.clear_entry import ClearEntry
+from utils.insert_default_value import InsertDefault
+
 class Calculate:
     def __init__(self, obj):
         self.obj = obj
@@ -190,6 +193,7 @@ class Calculate:
         self.add_sheet_to_xlsx.write(f"E{self.sheet_raw_count + 2}", total_pure)
         # closing the new xlsx file
         self.create_xlsx.close()
+        ClearEntry(self.obj).clear()
 
     # if value is
     # > weight: 78.879
